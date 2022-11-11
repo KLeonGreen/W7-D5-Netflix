@@ -6,52 +6,14 @@ const options = {
   },
 };
 
-const displayComedyMovies = async () => {
-  const response = await fetch("https://striveschool-api.herokuapp.com/api/movies/Comedy", options);
+const displayMovies = async (genre) => {
+  const response = await fetch(`https://striveschool-api.herokuapp.com/api/movies/${genre}`, options);
   const movies = await response.json();
   console.log(movies);
 
   movies.forEach((movie) => {
     console.log(movie);
-    const rowOfMovies = document.querySelector("#comedy");
-    rowOfMovies.innerHTML += `
-                                    
-                                    <div class="col-md-2" href="./details.html">
-                                    <a href="./details.html?movieID=${movie._id}&&movieCAT=${movie.category}">
-                                    <img class="movie-cover" src=${movie.imageUrl} />
-                                    </a>
-                                    
-                                   
-                                    </div>`;
-  });
-};
-const displayHorrorMovies = async () => {
-  const response = await fetch("https://striveschool-api.herokuapp.com/api/movies/Horror", options);
-  const movies = await response.json();
-  console.log(movies);
-
-  movies.forEach((movie) => {
-    console.log(movie);
-    const rowOfMovies = document.querySelector("#horror");
-    rowOfMovies.innerHTML += `
-                                    
-                                    <div class="col-md-2" href="./details.html">
-                                    <a href="./details.html?movieID=${movie._id}&&movieCAT=${movie.category}">
-                                    <img class="movie-cover" src=${movie.imageUrl} />
-                                    </a>
-                                    
-                                   
-                                    </div>`;
-  });
-};
-const displayRomanticMovies = async () => {
-  const response = await fetch("https://striveschool-api.herokuapp.com/api/movies/Romantic", options);
-  const movies = await response.json();
-  console.log(movies);
-
-  movies.forEach((movie) => {
-    console.log(movie);
-    const rowOfMovies = document.querySelector("#romantic");
+    const rowOfMovies = document.querySelector(`#${genre}`);
     rowOfMovies.innerHTML += `
                                     
                                     <div class="col-md-2" href="./details.html">
@@ -65,7 +27,7 @@ const displayRomanticMovies = async () => {
 };
 
 window.onload = async () => {
-  displayComedyMovies();
-  displayHorrorMovies();
-  displayRomanticMovies();
+  displayMovies("Comedy");
+  displayMovies("Horror");
+  displayMovies("Romantic");
 };
