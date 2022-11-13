@@ -14,15 +14,29 @@ const displayMovies = async (genre) => {
   movies.forEach((movie) => {
     console.log(movie);
     const rowOfMovies = document.querySelector(`#${genre}`);
-    rowOfMovies.innerHTML += `
+    const posters = document.querySelectorAll(`#posters-${genre}`);
+    if (posters.length < 6) {
+      rowOfMovies.innerHTML += `
                                     
-                                    <div class="col-md-2" href="./details.html">
+                                    <div id="posters-${genre}" class="col-md-2" href="./details.html">
                                     <a href="./details.html?movieID=${movie._id}&&movieCAT=${movie.category}">
                                     <img class="movie-cover" src=${movie.imageUrl} />
                                     </a>
                                     
                                    
                                     </div>`;
+    } else {
+      const rowOfMovies2 = document.querySelector(`#${genre}2`);
+      rowOfMovies2.innerHTML += `
+                                    
+                                    <div id="posters-${genre}" class="col-md-2" href="./details.html">
+                                    <a href="./details.html?movieID=${movie._id}&&movieCAT=${movie.category}">
+                                    <img class="movie-cover" src=${movie.imageUrl} />
+                                    </a>
+                                    
+                                  
+                                    </div>`;
+    }
   });
 };
 
